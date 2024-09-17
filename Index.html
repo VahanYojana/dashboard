@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Dealer Dashboard</title>
+    <title>Vehicle Enquiry Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -111,9 +111,9 @@
         <div class="card" id="home-page">
             <div class="sub-box">
                 <h1>Vahan Yojana</h1>
-                <p>Address: Beaur More, Patna, Bihar</p>
-                <p>Email: company@gmail.com</p>
-                <p>Mobile: +1234567890</p>
+                <p>Address: Beaur More,Patna</p>
+                <p>Email: info@vahanyojana.com</p>
+                <p>Mobile: +91 9262725444</p>
             </div>
 
             <div class="form-group">
@@ -123,7 +123,7 @@
                 <input type="text" id="employee_name" placeholder="Employee Name" required>
             </div>
             <div class="form-group">
-                <input type="date" id="date" required>
+                <input type="date" id="date" placeholder="Date" required>
             </div>
 
             <select id="vehicle-type" onchange="selectPage(this.value)" required>
@@ -140,7 +140,8 @@
             <input type="text" id="tw_customer_name" placeholder="Customer Name">
             <input type="text" id="tw_district" placeholder="District">
             <input type="text" id="tw_block" placeholder="Block">
-            <input type="number" id="tw_mobile" placeholder="Mobile Number" required>
+            <input type="number" id="tw_mobile" placeholder="Mobile Number" pattern="\d{10}" maxlength="10" title="Please enter exactly 10 digits" required>
+
             <!-- <input type="tel" id="tw_mobile" placeholder="Mobile Number" pattern="[0-9]*" required> -->
             <input type="text" id="tw_vehicle_name" placeholder="Vehicle Name">
             <input type="number" id="tw_on_road_price" placeholder="On Road Price" required>
@@ -166,7 +167,8 @@
             <input type="text" id="th_customer_name" placeholder="Customer Name">
             <input type="text" id="th_district" placeholder="District">
             <input type="text" id="th_block" placeholder="Block">
-            <input type="number" id="th_mobile" placeholder="Mobile Number" required>
+            <input type="text" id="th_mobile" placeholder="Mobile Number" pattern="\d{10}" maxlength="10" title="Please enter exactly 10 digits" required>
+
             <input type="text" id="th_vehicle_name" placeholder="Vehicle Name">
             <input type="number" id="th_on_road_price" placeholder="On Road Price" required>
             <input type="number" id="th_ex_showroom_price" placeholder="Ex Showroom Price" required>
@@ -191,7 +193,8 @@
             <input type="text" id="fw_customer_name" placeholder="Customer Name">
             <input type="text" id="fw_district" placeholder="District">
             <input type="text" id="fw_block" placeholder="Block">
-            <input type="number" id="fw_mobile" placeholder="Mobile Number" required>
+            <input type="text" id="fw_mobile" placeholder="Mobile Number" pattern="\d{10}" maxlength="10" required>
+
             <input type="text" id="fw_vehicle_name" placeholder="Vehicle Name">
             <input type="number" id="fw_on_road_price" placeholder="On Road Price" required>
             <input type="number" id="fw_ex_showroom_price" placeholder="Ex Showroom Price" required>
