@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Dealer Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        .header, .footer {
+            background-color: #fff;
+            color: #585454;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #fff;
+        }
+        .container-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.2s;
+            width: 100%;
+            max-width: 400px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        .sub-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 0.75;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+        input[type="text"], input[type="date"], input[type="number"], select {
+            padding: 10px;
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            transition: border-color 0.3s;
+        }
+        .submit-button {
+            float: right;
+        }
+        input[type="text"]:hover, input[type="date"]:hover, input[type="number"]:hover, select:hover {
+            border-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="logo.jpeg" alt="Company Logo" style="width: 200px; height: 80px;">
+    <h1>Enquiry Dashboard</h1>
+</div>
+
+<div class="container-wrapper">
+    <div class="container">
+        <!-- Home Page Card -->
+        <div class="card" id="home-page">
+            <div class="sub-box">
+                <h1>Vahan Yojana</h1>
+                <p>Address: Beaur More, Patna, Bihar</p>
+                <p>Email: company@gmail.com</p>
+                <p>Mobile: +1234567890</p>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="employee_id" placeholder="Employee ID" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="employee_name" placeholder="Employee Name" required>
+            </div>
+            <div class="form-group">
+                <input type="date" id="date" required>
+            </div>
+
+            <select id="vehicle-type" onchange="selectPage(this.value)" required>
+                <option value="">Select Vehicle Type</option>
+                <option value="two_wheeler">Two Wheeler</option>
+                <option value="three_wheeler">Three Wheeler</option>
+                <option value="four_wheeler">Four Wheeler</option>
+            </select>
+        </div>
+
+        <!-- Two Wheeler Page -->
+        <div class="card" id="two-wheeler-page" style="display: none;">
+            <h2>Two Wheeler Customer Details</h2>
+            <input type="text" id="tw_customer_name" placeholder="Customer Name">
+            <input type="text" id="tw_district" placeholder="District">
+            <input type="text" id="tw_block" placeholder="Block">
+            <input type="number" id="tw_mobile" placeholder="Mobile Number" required>
+            <!-- <input type="tel" id="tw_mobile" placeholder="Mobile Number" pattern="[0-9]*" required> -->
+            <input type="text" id="tw_vehicle_name" placeholder="Vehicle Name">
+            <input type="number" id="tw_on_road_price" placeholder="On Road Price" required>
+            <input type="number" id="tw_ex_showroom_price" placeholder="Ex Showroom Price" required>
+            <div class="form-group">
+                <!-- <label for="source-of-info" style="display: block; margin-bottom: 5px;">How did you get to know about our service?</label> -->
+                <select id="tw_source_of_info" required style="display: block; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="" disabled selected>Enquiry Source</option>
+                    <option value="home_to_home_visit">Home to Home visit</option>
+                    <option value="customer_referral">Customer Referral</option>
+                    <option value="friends_relatives">From Friends and Relatives</option>
+                    <option value="website">From Website</option>
+                    <option value="social_media">From Social Media</option>
+                </select>
+            </div>
+            <button onclick="goHome()">Back</button>
+            <button class="submit-button" onclick="submitForm('two_wheeler')">Submit</button>
+        </div>
+
+        <!-- Three Wheeler Page -->
+        <div class="card" id="three-wheeler-page" style="display: none;">
+            <h2>Three Wheeler Customer Details</h2>
+            <input type="text" id="th_customer_name" placeholder="Customer Name">
+            <input type="text" id="th_district" placeholder="District">
+            <input type="text" id="th_block" placeholder="Block">
+            <input type="number" id="th_mobile" placeholder="Mobile Number" required>
+            <input type="text" id="th_vehicle_name" placeholder="Vehicle Name">
+            <input type="number" id="th_on_road_price" placeholder="On Road Price" required>
+            <input type="number" id="th_ex_showroom_price" placeholder="Ex Showroom Price" required>
+            <div class="form-group">
+                <!-- <label for="source-of-info" style="display: block; margin-bottom: 5px;">How did you get to know about our service?</label> -->
+                <select id="th_source_of_info" required style="display: block; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="" disabled selected>Enquiry Source</option>
+                    <option value="home_to_home_visit">Home to Home visit</option>
+                    <option value="customer_referral">Customer Referral</option>
+                    <option value="friends_relatives">From Friends and Relatives</option>
+                    <option value="website">From Website</option>
+                    <option value="social_media">From Social Media</option>
+                </select>
+            </div>
+            <button onclick="goHome()">Back</button>
+            <button class="submit-button" onclick="submitForm('three_wheeler')">Submit</button>
+        </div>
+
+        <!-- Four Wheeler Page -->
+        <div class="card" id="four-wheeler-page" style="display: none;">
+            <h2>Four Wheeler Customer Details</h2>
+            <input type="text" id="fw_customer_name" placeholder="Customer Name">
+            <input type="text" id="fw_district" placeholder="District">
+            <input type="text" id="fw_block" placeholder="Block">
+            <input type="number" id="fw_mobile" placeholder="Mobile Number" required>
+            <input type="text" id="fw_vehicle_name" placeholder="Vehicle Name">
+            <input type="number" id="fw_on_road_price" placeholder="On Road Price" required>
+            <input type="number" id="fw_ex_showroom_price" placeholder="Ex Showroom Price" required>
+            <div class="form-group">
+                <!-- <label for="source-of-info" style="display: block; margin-bottom: 5px;">How did you get to know about our service?</label> -->
+                <select id="fw_source_of_info" required style="display: block; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="" disabled selected>Enquiry Source</option>
+                    <option value="home_to_home_visit">Home to Home visit</option>
+                    <option value="customer_referral">Customer Referral</option>
+                    <option value="friends_relatives">From Friends and Relatives</option>
+                    <option value="website">From Website</option>
+                    <option value="social_media">From Social Media</option>
+                </select>
+            </div>
+            <button onclick="goHome()">Back</button>
+            <button class="submit-button" onclick="submitForm('four_wheeler')">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectPage(page) {
+        const employeeId = document.getElementById('employee_id').value;
+        const employeeName = document.getElementById('employee_name').value;
+        const date = document.getElementById('date').value;
+
+        // Validate Employee ID, Dealer Name, and Date
+        if (!employeeId || !employeeName || !date) {
+            alert('Please fill out Employee ID, Employee Name, and Date before selecting a vehicle type.');
+            document.getElementById('vehicle-type').value = ''; // Reset the vehicle type dropdown
+            return;
+        }
+
+        // Hide all vehicle pages and show the selected page
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('two-wheeler-page').style.display = 'none';
+        document.getElementById('three-wheeler-page').style.display = 'none';
+        document.getElementById('four-wheeler-page').style.display = 'none';
+
+        if (page === 'two_wheeler') {
+            document.getElementById('two-wheeler-page').style.display = 'block';
+        } else if (page === 'three_wheeler') {
+            document.getElementById('three-wheeler-page').style.display = 'block';
+        } else if (page === 'four_wheeler') {
+            document.getElementById('four-wheeler-page').style.display = 'block';
+        }
+    }
+
+    function goHome() {
+        document.getElementById('home-page').style.display = 'block';
+        document.getElementById('two-wheeler-page').style.display = 'none';
+        document.getElementById('three-wheeler-page').style.display = 'none';
+        document.getElementById('four-wheeler-page').style.display = 'none';
+        document.getElementById('vehicle-type').value = '';
+    }
+
+    function submitForm(page) {
+    const employeeId = document.getElementById('employee_id').value;
+    const employeeName = document.getElementById('employee_name').value;
+    const date = document.getElementById('date').value;
+    const customerName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_customer_name`).value;
+    const district = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_district`).value;
+    const block = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_block`).value;
+    const mobile = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_mobile`).value;
+    const vehicleName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_vehicle_name`).value;
+    const onRoadPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_on_road_price`).value;
+    const exShowroomPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_ex_showroom_price`).value;
+    const sourceOfInfo = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_source_of_info`).value;
+
+    const data = {
+        employee_id: employeeId,
+        employee_name: employeeName,
+        date: date,
+        vehicle_type: page,
+        customer_name: customerName,
+        district: district,
+        block: block,
+        mobile: mobile,
+        vehicle_name: vehicleName,
+        on_road_price: onRoadPrice,
+        ex_showroom_price: exShowroomPrice,
+        source_of_info: sourceOfInfo
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycbzeP7iTSsRoZWGO0AXshlEKs1rCvzJxL6wV7rX0s0ibeJjt3LHdSUYsM1ayxfziFToybw/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(data)
+    }).then(response => {
+        alert('Form Submitted Successfully!');
+        goHome();  // Reset to home page
+    }).catch(error => {
+        console.error('Error!', error.message);
+    });
+}
+
+        console.log('Submitted data:', data);
+    
+</script>
+
+<div class="footer">
+    <p>&copy; 2024 Company Name. All rights reserved.</p>
+</div>
+
+</body>
+</html>
