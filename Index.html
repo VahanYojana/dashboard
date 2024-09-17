@@ -221,7 +221,7 @@
         const employeeName = document.getElementById('employee_name').value;
         const date = document.getElementById('date').value;
 
-        // Validate Employee ID, Dealer Name, and Date
+        // Validate Employee ID, Employee Name, and Date
         if (!employeeId || !employeeName || !date) {
             alert('Please fill out Employee ID, Employee Name, and Date before selecting a vehicle type.');
             document.getElementById('vehicle-type').value = ''; // Reset the vehicle type dropdown
@@ -251,52 +251,83 @@
         document.getElementById('vehicle-type').value = '';
     }
 
+    function validateFields(page) {
+        const customerName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_customer_name`).value;
+        const district = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_district`).value;
+        const block = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_block`).value;
+        const mobile = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_mobile`).value;
+        const vehicleName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_vehicle_name`).value;
+        const onRoadPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_on_road_price`).value;
+        const exShowroomPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_ex_showroom_price`).value;
+        const sourceOfInfo = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_source_of_info`).value;
+
+        // Check if any field is empty
+        if (!customerName || !district || !block || !mobile || !vehicleName || !onRoadPrice || !exShowroomPrice || !sourceOfInfo) {
+            alert('Please fill all the fields.');
+            return false; // Validation failed
+        }
+
+        return true; // Validation passed
+    }
+
     function submitForm(page) {
-    const employeeId = document.getElementById('employee_id').value;
-    const employeeName = document.getElementById('employee_name').value;
-    const date = document.getElementById('date').value;
-    const customerName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_customer_name`).value;
-    const district = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_district`).value;
-    const block = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_block`).value;
-    const mobile = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_mobile`).value;
-    const vehicleName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_vehicle_name`).value;
-    const onRoadPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_on_road_price`).value;
-    const exShowroomPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_ex_showroom_price`).value;
-    const sourceOfInfo = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_source_of_info`).value;
+        const employeeId = document.getElementById('employee_id').value;
+        const employeeName = document.getElementById('employee_name').value;
+        const date = document.getElementById('date').value;
 
-    const data = {
-        employee_id: employeeId,
-        employee_name: employeeName,
-        date: date,
-        vehicle_type: page,
-        customer_name: customerName,
-        district: district,
-        block: block,
-        mobile: mobile,
-        vehicle_name: vehicleName,
-        on_road_price: onRoadPrice,
-        ex_showroom_price: exShowroomPrice,
-        source_of_info: sourceOfInfo
-    };
+        // Check if the Employee ID, Employee Name, and Date are filled
+        if (!employeeId || !employeeName || !date) {
+            alert('Please fill out Employee ID, Employee Name, and Date.');
+            return;
+        }
 
-    fetch('https://script.google.com/macros/s/AKfycbzeP7iTSsRoZWGO0AXshlEKs1rCvzJxL6wV7rX0s0ibeJjt3LHdSUYsM1ayxfziFToybw/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(data)
-    }).then(response => {
-        alert('Form Submitted Successfully!');
-        goHome();  // Reset to home page
-    }).catch(error => {
-        console.error('Error!', error.message);
-    });
-}
+        // Validate fields specific to the selected vehicle type page
+        if (!validateFields(page)) {
+            return; // Stop the form submission if validation fails
+        }
 
-        console.log('Submitted data:', data);
-    
+        // Collect data for submission
+        const customerName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_customer_name`).value;
+        const district = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_district`).value;
+        const block = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_block`).value;
+        const mobile = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_mobile`).value;
+        const vehicleName = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_vehicle_name`).value;
+        const onRoadPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_on_road_price`).value;
+        const exShowroomPrice = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_ex_showroom_price`).value;
+        const sourceOfInfo = document.getElementById(`${page === 'two_wheeler' ? 'tw' : page === 'three_wheeler' ? 'th' : 'fw'}_source_of_info`).value;
+
+        const data = {
+            employee_id: employeeId,
+            employee_name: employeeName,
+            date: date,
+            vehicle_type: page,
+            customer_name: customerName,
+            district: district,
+            block: block,
+            mobile: mobile,
+            vehicle_name: vehicleName,
+            on_road_price: onRoadPrice,
+            ex_showroom_price: exShowroomPrice,
+            source_of_info: sourceOfInfo
+        };
+
+        // Post data to server
+        fetch('https://script.google.com/macros/s/AKfycbzeP7iTSsRoZWGO0AXshlEKs1rCvzJxL6wV7rX0s0ibeJjt3LHdSUYsM1ayxfziFToybw/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(data)
+        }).then(response => {
+            alert('Form Submitted Successfully!');
+            goHome();  // Reset to home page
+        }).catch(error => {
+            console.error('Error!', error.message);
+        });
+    }
 </script>
+
 
 <div class="footer">
     <p>&copy; 2024 Company Name. All rights reserved.</p>
