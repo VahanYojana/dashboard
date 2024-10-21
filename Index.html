@@ -213,7 +213,23 @@
 
         return true;
     }
+  function resetForm() {
+    // Reset the home page fields
+    document.getElementById('employee_id').value = '';
+    document.getElementById('employee_name').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('vehicle-type').value = '';
 
+    // Reset the vehicle page fields
+    document.getElementById('customer_name').value = '';
+    document.getElementById('district').value = '';
+    document.getElementById('block').value = '';
+    document.getElementById('mobile').value = '';
+    document.getElementById('vehicle_name').value = '';
+    document.getElementById('on_road_price').value = '';
+    document.getElementById('ex_showroom_price').value = '';
+    document.getElementById('source_of_info').value = '';
+}
     function submitForm() {
         const employeeId = document.getElementById('employee_id').value;
         const employeeName = document.getElementById('employee_name').value;
@@ -261,6 +277,7 @@
             body: new URLSearchParams(formData)
         }).then(response => {
             alert('Form Submitted Successfully!');
+            resetForm();
             goHome();
         }).catch(error => {
             console.error('Error!', error.message);
